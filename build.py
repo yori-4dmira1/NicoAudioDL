@@ -19,6 +19,13 @@ from pathlib import Path
 
 import runtime
 
+# Windows(GitHub Actions含む)の既定コードページで日本語がprintできず落ちるのを防ぐ
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 ROOT = Path(__file__).resolve().parent
 VENDOR = ROOT / "vendor"
 NAME = "NicoAudioDL"
